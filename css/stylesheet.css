@@ -1,0 +1,14 @@
+
+div.absolute img{
+    position: absolute;
+    bottom: 0px;
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+
+body {
+    background-image: url("../images/chenrun.gif");
+    background-repeat: repeat;
+}
