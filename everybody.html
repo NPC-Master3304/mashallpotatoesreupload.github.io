@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HONK!</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HONK YOUR BODY!"/>
+<meta property="og:image" content="images/everybody-thumb.jpg"/>
+<meta property="og:title" content="HONK"/>
+<meta property="og:description" content="HONK YOUR BODY!"/>
+<link href="images/favicon.gif" rel="shortcut icon" type="image/gif"/>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        background: #000;
+    }
+    #wrapper {
+        height: 100%;
+    }
+
+    #youtube-link {
+        position: fixed;
+        right: 5px;
+        bottom: 5px;
+        background: url("images/yt-icon.png") bottom right no-repeat;
+        background-size: contain;
+        height: 70px;
+        width: 150px;
+        max-width: 30%;
+        opacity: 0.5;
+        cursor: pointer;
+        transition: opacity 200ms ease-in-out;
+    }
+
+    #youtube-link:hover {
+        opacity: 1;
+    }
+
+    #homepage-link {
+        position: fixed;
+        top: 5px;
+        left: 5px;
+        background: url("images/honk honk.png") top left no-repeat;
+        background-size: contain;
+        height: 48px;
+        width: 200px;
+        max-width: 30%;
+        opacity: 0.5;
+        cursor: pointer;
+        transition: opacity 200ms ease-in-out;
+    }
+
+    #gofundme-link:hover {
+        opacity: 1;
+    }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+<div id="youtube-link" onClick="goYoutube()" title="Watch this video on YouTube!"></div>
+<div id="homepage-link" onClick="goHome()" title="go home"></div>
+</div>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery.tubular.1.0.js"></script>
+<script>
+    $('document').ready(function() {
+        var options = { videoId: 'im3UMwYQHMw', start: 0, mute: 0 };
+        $('#wrapper').tubular(options);
+    });
+
+    function goYoutube() {
+        window.open('https://www.youtube.com/watch?v=im3UMwYQHMw', '_blank');
+    }
+
+    function goHome() {
+        window.open('index.html', '_blank');
+    }
+</script>
+</body>
+</html>
