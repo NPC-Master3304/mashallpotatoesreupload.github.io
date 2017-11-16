@@ -1,3 +1,6 @@
+
+
+
 <!doctype html>
 
 <html lang="en">
@@ -18,7 +21,7 @@
   <link rel="stylesheet" href="../css/stylesheet.css">
 
   <title>
-    Clap👏post👏generator👏for👏all👏your👏clap👏posting👏needs
+    owo text generator *notices shitpost* uwu what's this?
   </title>
 
   <!--[if lt IE 9]>
@@ -35,39 +38,34 @@
       font-size: 12pt;
       resize: vertical;
     }
-    #clapButton{
+    #owoButton{
       display: block;
       margin: auto;
-      font-size: 48pt;
+      font-size: 24pt;
     }
     h1{
       text-align: center;
     }
   </style>
 
-  <h1>Clap👏Post👏Generator👏</h1>
-  <textarea id="textarea" rows="8">Put your clap post text here then smash that clap button</textarea>
+  <h1>owo text generator</h1>
+  <p>Fow aww youw uwu nyeeds >w<  Pwease owo wesponsibwy</p>
+  <p>Based on the <a href="https://chrome.google.com/webstore/detail/owo/jolaggjkdhhgcdhcjjhfkkbllefoggob?hl=en">OWO Chrome extension</a> by leafysweetsgarden</p>
+  <textarea id="textarea" rows="8">Enter your text here and click the "owo" button to notice that bulge!</textarea>
 
-  <button id="clapButton" onclick="Clap()">👏</button>
+  <button id="owoButton" onclick="OwoifyText()">owo</button>
   <script>
-
-  String.prototype.replaceAll = function(search, replacement) {
-      var target = this;
-      return target.split(search).join(replacement);
-  };
-
-  function Clap(){
-    ClapReplace();
-    PlayClap();
-  }
-
-  function ClapReplace() {
-      document.getElementById("textarea").value = document.getElementById("textarea").value.replaceAll(' ','👏');
-  };
-
-  function PlayClap(melody) {
-    var clapSound = new Audio('/sounds/clap.wav');
-    clapSound.play();
+  var faces = ["(・`ω´・)", ";;w;;", "owo", "UwU", ">w<", "^w^"];
+  function OwoifyText(){
+      v = document.getElementById("textarea").value
+      v = v.replace(/(?:r|l)/g, "w");
+      v = v.replace(/(?:R|L)/g, "W");
+      v = v.replace(/n([aeiou])/g, 'ny$1');
+      v = v.replace(/N([aeiou])/g, 'Ny$1');
+      v = v.replace(/N([AEIOU])/g, 'Ny$1');
+      v = v.replace(/ove/g, "uv");
+      v = v.replace(/\!+/g, " " + faces[Math.floor(Math.random() * faces.length)] + " ");
+      document.getElementById("textarea").value = v
   };
   </script>
 </body>
