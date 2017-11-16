@@ -1,0 +1,74 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109368824-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109368824-1');
+  </script>
+  <link href="images/favicon.gif" rel="shortcut icon" type="image/gif"/>
+  <meta charset="utf-8">
+  <meta name="HONK HONK HONK" content="HONK">
+  <meta name="mashallpotatoes" content="HONKS">
+  <link rel="stylesheet" href="css/stylesheet.css">
+
+  <title>
+    Clap👏post👏generator👏for👏all👏your👏clap👏posting👏needs
+  </title>
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <style>
+    textarea{
+      display: block;
+      margin: auto;
+      width: 100%;
+      font-size: 12pt;
+      resize: vertical;
+    }
+    #clapButton{
+      display: block;
+      margin: auto;
+      font-size: 48pt;
+    }
+    h1{
+      text-align: center;
+    }
+  </style>
+
+  <h1>Clap👏Post👏Generator👏</h1>
+  <textarea id="textarea" rows="8">Put your clap post text here then smash that clap button</textarea>
+
+  <button id="clapButton" onclick="Clap()">👏</button>
+  <script>
+
+  String.prototype.replaceAll = function(search, replacement) {
+      var target = this;
+      return target.split(search).join(replacement);
+  };
+
+  function Clap(){
+    ClapReplace();
+    PlayClap();
+  }
+
+  function ClapReplace() {
+      document.getElementById("textarea").value = document.getElementById("textarea").value.replaceAll(' ','👏');
+  };
+
+  function PlayClap(melody) {
+    var clapSound = new Audio('/sounds/clap.wav');
+    clapSound.play();
+  };
+  </script>
+</body>
+</html>
