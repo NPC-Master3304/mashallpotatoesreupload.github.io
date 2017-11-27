@@ -1,6 +1,15 @@
 html,body {
     padding:0;
     margin:0;
+    font-family: Times, "Times New Roman", serif;
+}
+
+.centered_text{
+    text-align: center;
+}
+
+.aesthetic{
+    letter-spacing: 8px;
 }
 
 div.absolute img{
@@ -26,6 +35,63 @@ div.centered img{
   transform: translate(-50%, -50%);
   max-height: 100%;
   max-width: 100%;
+}
+
+.nav {
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  text-align:center;
+  font-size: 10pt;
+}
+
+.nav ul{
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.nav li {
+  display: inline;
+}
+
+.nav a{
+  display:inline-block;
+  padding:10px;
+  text-decoration: none;
+}
+
+.boringlist{
+  list-style-type: none;
+  font-size: 10pt;
+}
+
+.boringlist a{
+  display:inline-block;
+  padding:10px;
+  text-decoration: none;
+}
+
+.yotsuba{
+  background-color: #D5DAF0;
+  color: #AF0A0F;
+}
+
+.yotsuba p{
+  color: black;
+}
+
+.yotsuba a, .button {
+  color: #34345C;
+  text-decoration: none;
+}
+
+.yotsuba  a:hover, a:hover, .button:hover {
+  color: #DD0000;
+}
+
+.tricklink a:hover{
+  display: none;
 }
 
 /*body {
