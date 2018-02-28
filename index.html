@@ -53,6 +53,11 @@
       </div>
     </div>
   </div>
-  <audio src="music/lain psx.mp3" autoplay="true" loop></audio>
+  <audio src="music/lain psx.mp3" autoplay="true" loop id="bgm"></audio>
+  <script>
+    // lower the damn bgm volume, that honk always scares me
+    var audio = document.getElementById("bgm");
+    audio.volume = 0.1;
+  </script>
 </body>
 </html>

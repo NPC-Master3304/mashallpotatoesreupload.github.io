@@ -1,0 +1,119 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109368824-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109368824-1');
+  </script>
+  <link href="/images/favicon.gif" rel="shortcut icon" type="image/gif"/>
+  <meta charset="utf-8">
+  <meta name="HONK HONK HONK" content="HONK">
+  <meta name="mashallpotatoes" content="HONKS">
+  <link rel="stylesheet" href="../css/stylesheet.css">
+  <script type="text/javascript" src="../tools/thesaurus.json"></script>
+
+  <title>
+    I am very smart text generator
+  </title>
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body class="yotsuba">
+  <style>
+    textarea{
+      display: block;
+      margin: auto;
+      width: 100%;
+      font-size: 12pt;
+      resize: vertical;
+    }
+    #smartButton{
+      display: block;
+      margin: auto;
+      font-size: 12pt;
+    }
+    h1{
+      text-align: center;
+    }
+  </style>
+
+  <h1>I am very smart text generator</h1>
+  <p>Replace every word with the longest possible synonym to sound very smart.</p>
+  <p>Inspired by the thesaurus abuse on <a href="https://reddit.com/r/iamverysmart">/r/iamverysmart</a></p>
+  <textarea id="textarea" rows="8">Enter your sentence here</textarea>
+
+  <button id="smartButton" onclick="enlightenSentenceWithIntelligence()">Proceed</button>
+  <a href="/tools.html">back to tools page</a>
+  <script>
+
+  var thesaurus;
+  var stopWords = ["ourselves", "hers", "between", "yourself", "but", "again", "there", "about", "once", "during", "out", "having", "with", "they", "own", "an", "be", "some", "for", "do", "its", "yours", "such", "into", "of", "most", "itself", "other", "off", "is", "s", "am", "or", "who", "as", "from", "him", "each", "the", "themselves", "until", "below", "are", "we", "these", "your", "his", "through", "don", "nor", "me", "were", "her", "more", "himself", "this", "down", "should", "our", "their", "while", "above", "both", "up", "to", "ours", "had", "she", "all", "no", "when", "at", "any", "before", "them", "same", "and", "been", "have", "in", "will", "on", "does", "yourselves", "then", "that", "because", "what", "over", "why", "so", "can", "did", "not", "now", "under", "he", "you", "herself", "has", "just", "where", "too", "only", "myself", "which", "those", "i", "after", "few", "whom", "t", "being", "if", "theirs", "my", "against", "a", "by", "doing", "it", "how", "further", "was", "here", "than", "get", "go"]
+  init();
+
+  function init(){
+    loadJSON(function(response){
+      thesaurus = JSON.parse(response);
+    })
+  }
+
+  function loadJSON(callback) {
+
+     var xobj = new XMLHttpRequest();
+         xobj.overrideMimeType("application/json");
+     xobj.open('GET', 'thesaurus.json', true);
+     xobj.onreadystatechange = function () {
+           if (xobj.readyState == 4 && xobj.status == "200") {
+             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+             callback(xobj.responseText);
+           }
+     };
+     xobj.send(null);
+}
+
+  function getSynonym(word){
+    console.log(word);
+    // make sure word isn't a stopword (such as common prepositions or pronouns)
+    if (stopWords.includes(word)){
+      console.log("stopword");
+      return word;
+    }
+    var synonym = thesaurus[word];
+    console.log(synonym);
+    if(synonym === undefined){
+      console.log("undefined word");
+      return word;
+    }
+    else{
+      return synonym;
+    }
+  };
+
+  function replaceWithSynonyms(words){
+    words = words.toLowerCase();
+    var wordArray = words.split(" ");
+    var outputWords = "";
+    for(i = 0; i < wordArray.length; i++){
+      var curWord = wordArray[i];
+      var strippedWord = curWord;
+      strippedWord.replace(/[^A-Za-z0-9]/g, '');
+      var synonym = getSynonym(curWord);
+      outputWords += curWord.replace(strippedWord, synonym) + " ";
+    }
+    return outputWords;
+  };
+
+  function enlightenSentenceWithIntelligence(){
+    document.getElementById("textarea").value = replaceWithSynonyms(document.getElementById("textarea").value);
+  };
+  </script>
+</body>
+</html>
