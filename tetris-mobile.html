@@ -10,6 +10,17 @@
 
     gtag('config', 'UA-109368824-1');
   </script>
+  <!-- prevent zooming on mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109368824-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109368824-1');
+  </script>
   <title>Chen Tetris</title>
   <style>
     /* body      { font-family: Helvetica, sans-serif; } */
@@ -31,13 +42,28 @@
     @media screen and (min-width: 700px) and (min-height: 700px)  { #tetris { font-size: 1.75em; width: 650px; } #menu { width: 300px; height: 600px; } #upcoming { width: 150px; height: 150px; } #canvas { width: 300px; height: 600px; } } /* 30px chunks */
     @media screen and (min-width: 800px) and (min-height: 800px)  { #tetris { font-size: 2.00em; width: 750px; } #menu { width: 350px; height: 700px; } #upcoming { width: 175px; height: 175px; } #canvas { width: 350px; height: 700px; } } /* 35px chunks */
     @media screen and (min-width: 900px) and (min-height: 900px)  { #tetris { font-size: 2.25em; width: 850px; } #menu { width: 400px; height: 800px; } #upcoming { width: 200px; height: 200px; } #canvas { width: 400px; height: 800px; } } /* 40px chunks */
+    .buttons {
+      display: table;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .button {
+      display: table-cell;
+      vertical-align: top;
+      padding: 5%;
+    }
+    .button img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 
 <body class="yotsuba aesthetic">
   <div id="tetris">
     <div id="menu">
-      <p id="start"><a href="javascript:play();">Press Space to Play.</a></p>
+      <p id="start"><a href="javascript:play();">Tap here to start</a></p>
       <p><canvas id="upcoming"></canvas></p>
       <p>score <span id="score">00000</span></p>
       <p>rows <span id="rows">0</span></p>
@@ -48,18 +74,27 @@
     <canvas id="canvas">
       Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
     </canvas>
+    <div class="buttons">
+      <div class="button">
+        <img src="/images/icons/left.png" onclick="left()"/>
+      </div>
+      <div class="button">
+        <img src="/images/icons/down.png" onclick="down()"/>
+      </div>
+      <div class="button">
+        <img src="/images/icons/flip.png" onclick="flip()"/>
+      </div>
+      <div class="button">
+        <img src="/images/icons/right.png" onclick="right()"/>
+      </div>
+    </div>
   </div>
   <div class="centered_text">
+    <p>Tap the buttons! Holding doesn't work because I'm bad at webdev.</p>
+    <p>This is the mobile version. <a href="/tetris.html">Desktop version here</a></p>
     <p>Created using jakesgordon's <a href="https://github.com/jakesgordon/javascript-tetris">Javascript Tetris</a></p>
-    <p>This is the desktop version. <a href="/tetris-mobile.html">Mobile version here</a></p>
   </div>
   <link rel="stylesheet" href="css/stylesheet.css">
-  <audio src="music/tetris.mp3" autoplay="true" loop id="bgm"></audio>
-  <script>
-    // lower the damn bgm volume, that honk always scares me
-    var audio = document.getElementById("bgm");
-    audio.volume = 0.5;
-  </script>
   <script src="/tetris/stats.js"></script>
   <script>
 
@@ -232,6 +267,22 @@
       dy = canvas.height / ny; // (ditto)
       invalidate();
       invalidateNext();
+    }
+
+    function left(){
+        actions.push(DIR.LEFT);
+    }
+
+    function right(){
+        actions.push(DIR.RIGHT);
+    }
+
+    function flip(){
+        actions.push(DIR.UP);
+    }
+
+    function down(){
+        actions.push(DIR.DOWN);
     }
 
     function keydown(ev) {
