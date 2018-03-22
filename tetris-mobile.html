@@ -46,17 +46,26 @@
       display: table;
       border-collapse: collapse;
       width: 100%;
+      touch-action: manipulation;
     }
     .button {
       display: table-cell;
       vertical-align: top;
       padding: 5%;
+      touch-action: manipulation;
     }
     .button img {
       display: block;
       width: 100%;
       height: auto;
+      touch-action: manipulation;
     }
+
+    /* disable iOS context menu (hopefully) */
+    body { -webkit-touch-callout: none !important; }
+    a { -webkit-user-select: none !important; }
+    img { -webkit-user-select: none !important; }
+
   </style>
 </head>
 
@@ -87,7 +96,6 @@
     </div>
   </div>
   <div class="centered_text">
-    <p>Tap the buttons to control!</p>
     <p>This is the mobile version. <a href="/tetris.html">Desktop version here</a></p>
     <p>Created using jakesgordon's <a href="https://github.com/jakesgordon/javascript-tetris">Javascript Tetris</a></p>
   </div>
