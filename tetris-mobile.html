@@ -11,7 +11,7 @@
     gtag('config', 'UA-109368824-1');
   </script>
   <!-- prevent zooming on mobile -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109368824-1"></script>
   <script>
@@ -76,7 +76,7 @@
         <img src="/images/icons/left.png" onclick="left()"/>
       </div>
       <div class="button">
-        <img src="/images/icons/down.png" onclick="down()"/>
+        <img src="/images/icons/down.png" onmousedown="downPress()" onmouseup="downRelease()" onclick="downRelease()"/>
       </div>
       <div class="button">
         <img src="/images/icons/flip.png" onclick="flip()"/>
@@ -87,13 +87,25 @@
     </div>
   </div>
   <div class="centered_text">
-    <p>Tap the buttons! Holding doesn't work because I'm bad at webdev.</p>
+    <p>Tap the buttons to control!</p>
     <p>This is the mobile version. <a href="/tetris.html">Desktop version here</a></p>
     <p>Created using jakesgordon's <a href="https://github.com/jakesgordon/javascript-tetris">Javascript Tetris</a></p>
   </div>
   <link rel="stylesheet" href="css/stylesheet.css">
   <script src="/tetris/stats.js"></script>
   <script>
+
+    // dumb hack I need to use to prevent iOS 10 from zooming on double tap
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
+
+    // disable context menu
+    window.oncontextmenu = function(event) {
+         event.preventDefault();
+         event.stopPropagation();
+         return false;
+    };
 
     //-------------------------------------------------------------------------
     // base helper methods
@@ -278,8 +290,33 @@
         actions.push(DIR.UP);
     }
 
+    var downHeld = false;
+    var timeout_time = 1;
+    var downTimeout = timeout_time;
+
+    function handleDownHeld(){
+        if(downHeld){
+            if(downTimeout <= 0){
+                drop();
+                downTimeout = timeout_time;
+            }
+            else{
+                downTimeout--;
+            }
+        }
+    }
+
     function down(){
+        dropHeld = false;
         actions.push(DIR.DOWN);
+    }
+
+    function downPress(){
+        downHeld = true;
+    }
+
+    function downRelease(){
+        downHeld = false;
     }
 
     function keydown(ev) {
@@ -332,17 +369,31 @@
       setNextPiece();
     }
 
+    // function update(idt) {
+    //   if (playing) {
+    //     if (vscore < score)
+    //       setVisualScore(vscore + 1);
+    //     handle(actions.shift());
+    //     dt = dt + idt;
+    //     if (dt > step) {
+    //       dt = dt - step;
+    //       drop();
+    //     }
+    //   }
+
     function update(idt) {
       if (playing) {
         if (vscore < score)
           setVisualScore(vscore + 1);
         handle(actions.shift());
+        handleDownHeld();
         dt = dt + idt;
         if (dt > step) {
           dt = dt - step;
           drop();
         }
       }
+
     }
 
     function handle(action) {
