@@ -72,9 +72,13 @@ div.centered img{
   text-decoration: none;
 }
 
-.yotsuba{
-  background-color: #D5DAF0;
-  color: #AF0A0F;
+.yotsuba h1, h2, h3, h4, h5{
+    color: #AF0A0F;
+}
+
+.yotsuba {
+    background-color: #D5DAF0;
+    color: black;
 }
 
 .yotsuba p{
